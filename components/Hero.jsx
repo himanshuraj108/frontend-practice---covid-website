@@ -508,10 +508,10 @@ const Hero = () => {
           </div>
         </div>
         {/* Sixth section */}
-        <div className="bg-purple-100 pb-8">
-          <div className="ml-15 mr-15 mt-15 mb-20">
+        <div className="bg-purple-100 pb-8 mt-15">
+          <div className="ml-15 mr-15 mb-20">
             <div className="grid">
-              <p className="font-bold text-center text-xl text-purple-600">
+              <p className="font-bold text-center text-xl text-purple-600 mt-10">
                 Symptoms Of Coronavirus
                 <br />
                 <span className="text-sm font-normal text-gray-500">
