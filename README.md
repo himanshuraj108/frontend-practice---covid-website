@@ -1,3 +1,3 @@
 FIGMA SOURCE - THAPATECHNICAL
 
-<h1 style="color: red;">ONLY FOR DESKTOP</h1>
+<h1>ONLY FOR DESKTOP</h1>
