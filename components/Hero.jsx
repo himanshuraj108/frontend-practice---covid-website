@@ -19,7 +19,7 @@ import { faCircleXmark } from "@fortawesome/free-solid-svg-icons";
 
 const Hero = () => {
   return (
-    <div>
+    <div className="">
       <div className="">
         {/* Hero Section */}
         <div className="bg-purple-100 h-[315px] rounded-br-[150px]">
@@ -611,9 +611,45 @@ const Hero = () => {
             </div>
           </div>
         </div>
+        {/* Seventh section */}
+        <div className="mt-15 ml-15 mr-15 mb-15">
+          <div className="text-center">
+            <p className="text-purple-600 font-bold text-2xl">
+              News And Articals
+              <br />
+              <span className="text-sm text-gray-500 font-normal">
+                Here is the all news and atricles related to the coronavirus
+              </span>
+            </p>
+          </div>
+
+          <div className="flex justify-evenly mt-[60px] gap-4">
+            {[...Array(3)].map((_, i) => (
+              <div key={i} className="relative w-[300px] h-[300px]">
+                <Image
+                  src={labtop}
+                  width={300}
+                  height={300}
+                  alt="labtop"
+                  className="w-full h-full object-cover"
+                />
+
+                <div className="absolute left-1/2 bottom-0 transform -translate-x-1/2 translate-y-1/2 bg-purple-600 px-4 py-2 text-white text-sm rounded shadow-md">
+                  {new Date(2025, 6, 25).toLocaleDateString("en-IN", {
+                    year: "numeric",
+                    month: "short",
+                    day: "numeric",
+                  })}
+                </div>
+              </div>
+            ))}
+          </div>
+        </div>
       </div>
     </div>
   );
 };
 
 export default Hero;
+
+
