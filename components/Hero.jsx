@@ -1,3 +1,4 @@
+"use client";
 import React from "react";
 import Image from "next/image";
 import hero from "@/assets/hero.png";
@@ -16,8 +17,78 @@ import { faMaskFace } from "@fortawesome/free-solid-svg-icons";
 import { faShield } from "@fortawesome/free-solid-svg-icons";
 import { faHouse } from "@fortawesome/free-solid-svg-icons";
 import { faCircleXmark } from "@fortawesome/free-solid-svg-icons";
+import { FaFacebook } from "react-icons/fa6";
+import { FaSquareXTwitter } from "react-icons/fa6";
+import { FaSquareInstagram } from "react-icons/fa6";
+import { FaYoutube } from "react-icons/fa6";
+import { useEffect, useState } from "react";
 
 const Hero = () => {
+  const [isDesktop, setIsDesktop] = useState(true);
+  const [mounted, setMounted] = useState(false);
+  const [showModal, setShowModal] = useState(false);
+
+  useEffect(() => {
+    const checkDevice = () => {
+      const width = window.innerWidth;
+      setIsDesktop(width >= 1024);
+    };
+
+    checkDevice();
+    setMounted(true);
+    window.addEventListener("resize", checkDevice);
+
+    return () => window.removeEventListener("resize", checkDevice);
+  }, []);
+
+  useEffect(() => {
+    if (mounted && !isDesktop) {
+      setShowModal(true);
+    }
+  }, [mounted, isDesktop]);
+
+  const handleCloseTab = () => {
+    setShowModal(false);
+    window.open("", "_self");
+    window.close();
+    setTimeout(() => {
+      window.location.href = "https://google.com";
+    }, 1000);
+  };
+
+  if (!mounted) return null;
+
+  if (!isDesktop) {
+    return (
+      <>
+        {showModal && (
+          <div className="fixed inset-0 flex items-center justify-center bg-black bg-opacity-50 z-50">
+            <div className="bg-white p-6 rounded-2xl shadow-xl w-[90%] max-w-md text-center space-y-4">
+              <div className="text-3xl">⚠️</div>
+              <h2 className="text-xl font-semibold text-purple-700">
+                Desktop Only Site
+              </h2>
+              <p className="text-gray-700">
+                This website is only accessible from desktop or laptop devices.
+                <br />
+                Please switch to a larger screen.
+              </p>
+              <button
+                onClick={handleCloseTab}
+                className="bg-purple-600 hover:bg-purple-700 text-white font-semibold py-2 px-6 rounded-full transition duration-200"
+              >
+                OK
+              </button>
+            </div>
+          </div>
+        )}
+        <div className="h-screen flex items-center justify-center text-purple-600 font-bold text-center px-4 blur-sm">
+          ⚠️ This website is only accessible from desktop or laptop devices.
+        </div>
+      </>
+    );
+  }
+
   return (
     <div className="">
       <div className="">
@@ -645,11 +716,66 @@ const Hero = () => {
             ))}
           </div>
         </div>
+
+        {/* Footer */}
+        <div className="mt-20 bg-purple-100 pb-20">
+          <div className="flex justify-evenly pt-15">
+            <div className="grid mb-18">
+              <p className="font-bold">
+                About
+                <br />
+                <span className="text-sm font-normal text-gray-500">
+                  This is the footer section this whole website.
+                </span>
+              </p>
+              <div className="flex gap-3 text-2xl">
+                <div className="text-[#1877F2] hover:cursor-pointer">
+                  <FaFacebook />
+                </div>
+                <div className="text-black hover:cursor-pointer">
+                  <FaSquareXTwitter />
+                </div>
+                <div className="text-[#79218c] hover:cursor-pointer">
+                  <FaSquareInstagram />
+                </div>
+                <div className="text-[#FF0000] hover:cursor-pointer">
+                  <FaYoutube />
+                </div>
+              </div>
+            </div>
+            <div className="grid gap-3">
+              <p className="font-bold">Quick Links</p>
+              <ul className="grid gap-2 text-sm text-purple-500">
+                <li>Symptoms</li>
+                <li>Prevention</li>
+                <li>FAQs</li>
+                <li>About Coronavirus</li>
+                <li>Contact Us</li>
+              </ul>
+            </div>
+            <div className="grid">
+              <p className="font-bold">Helpful Links</p>
+              <ul className="grid gap-2 text-sm text-purple-500">
+                <li className="">Healthcare Professional</li>
+                <li>LGU Facilities</li>
+                <li>Protect Your Family</li>
+                <li>World Health</li>
+              </ul>
+            </div>
+            <div className="grid">
+              <p className="font-bold">Resources</p>
+              <ul className="grid gap-2 text-sm text-purple-500">
+                <li>WHO Website</li>
+                <li>CDC Website</li>
+                <li>Gov Website</li>
+                <li>DOH Website</li>
+              </ul>
+            </div>
+          </div>
+        </div>
       </div>
     </div>
   );
 };
 
 export default Hero;
-
-
